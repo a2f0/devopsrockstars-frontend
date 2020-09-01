@@ -1,8 +1,6 @@
 import React from 'react'
-import { useLocation } from "react-router-dom";
-import { Map, TileLayer } from 'react-leaflet'
 
-const Company = React.memo(function FullScreenMap(props) {
+const Company = React.memo(function Company() {
 
   return (
     <div>

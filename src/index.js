@@ -8,10 +8,9 @@ import FullScreenMap from "./FullScreenMap.jsx";
 import Company from "./Company.jsx";
 import Skyline from "./Skyline.jsx";
 import FlexContainerRow from "./shared/FlexContainerRow.jsx"
+import Store from "./Store.jsx"
 
-function Store() {
-  return <h2>Store</h2>;
-}
+
 
 function Contact() {
   return <h2>Contact</h2>;
@@ -24,6 +23,7 @@ function AppRouter() {
       <Route path="/" exact component={Skyline} />
       <FlexContainerRow>
         <div className="flex-full-height-min">
+
           <div className="flex-container-column">
             
             <div className="flex-row-header">
