@@ -26,3 +26,4 @@ override.tf.json
 terraform.rc
 *.backend
 /terraform/main.tfvars
+/terraform/terraform.backend
