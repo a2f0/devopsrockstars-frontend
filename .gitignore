@@ -3,3 +3,9 @@ dist/
 node_modules/
 .DS_Store
 src/ts-out
+
+.vercel
+
+/.blackbox/pubring.gpg~
+/.blackbox/pubring.kbx~
+/.blackbox/secring.gpg
