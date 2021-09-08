@@ -39,14 +39,14 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
-  push-containers:
+  deploy:
     runs-on: ubuntu-latest
     continue-on-error: false
     steps:
       - uses: actions/checkout@v2
       # production deploy
       - uses: amondnet/vercel-action@v19
-        # if: ${{ github.event.ref == 'refs/heads/main' && github.event_name == 'push' }}
+        if: ${{ github.event.ref == 'refs/heads/production' && github.event_name == 'push' }}
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-args: '--prod'
