@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLocation } from "react-router-dom";
-import { MapContainer, TileLayer , Marker} from 'react-leaflet'
+import { MapContainer, TileLayer, Marker} from 'react-leaflet'
 import L from 'leaflet';
 import whiteStar from '/static/image/white-star-only.svg';
 
@@ -20,7 +20,6 @@ const FullScreenMap = React.memo(function FullScreenMap(props) {
   const southWest = L.latLng(17.476, -126.386);
   const northEast = L.latLng(51.289, -44.472);
   const bounds = L.latLngBounds(southWest, northEast);
-  const center = [40.762189, -73.961183];
 
   let starIcon = L.icon({
     iconUrl: whiteStar,
