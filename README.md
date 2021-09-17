@@ -1,7 +1,5 @@
 # devopsrockstars-frontend
 
-## Development
-
 install dependencies `npm ci`
 
 run `npm run start-server`
@@ -10,8 +8,13 @@ build `npm run build`
 
 test `npm run ci`
 
-## Production
+## Docker
 
-See `./.github/workflows/main.yml`.  The site is deployed to Vercel using Github actions.
+1. Build the container `docker build . -t devopsrockstars`.
+2. Run it `docker run -p 80:80 devopsrockstars` (this won't show any output until an HTTP request issued).
 
-The configuration for the site is under `./terraform`.
+## Pushing the container to Google's Container Registry
+
+1. `gcloud auth configure-docker`
+2. `docker tag devopsrockstars us.gcr.io/tearleads/devopsrockstars-frontend`
+3. `docker push us.gcr.io/tearleads/devopsrockstars-frontend`
