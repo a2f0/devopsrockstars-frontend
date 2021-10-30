@@ -1,6 +1,6 @@
 {
   "name": "devopsrockstars-frontend",
-  "version": "2.0.18",
+  "version": "2.0.19",
   "description": "",
   "main": "index.js",
   "engines": {
@@ -8,8 +8,8 @@
   },
   "scripts": {
     "start-server": "webpack serve --mode development --history-api-fallback",
-    "test": "./node_modules/.bin/wdio wdio.shared.conf.js",
-    "test-headless": "./node_modules/.bin/wdio wdio.headless.conf.js",
+    "test": "./node_modules/.bin/wdio wdio.shared.conf.ts",
+    "test-headless": "./node_modules/.bin/wdio wdio.headless.conf.ts",
     "ci": "start-server-and-test start-server http-get://localhost:8080 test",
     "ci-headless": "start-server-and-test start-server http-get://localhost:8080 test-headless",
     "format": "prettier --write \"src/**/*.js\"",
