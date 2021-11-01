@@ -12,6 +12,23 @@ const FullScreen = styled.div`
   right: 0px;
   width: 100vw;
   height: 100vh;
+
+  // Leaftlet override
+  .leaflet-container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -2000;
+    pointer-events: auto;
+    background: black !important;
+  }
+
+  // Leaflet override
+  // This is a hack to prevent lines between tiles (anti-aliasing?).
+  .leaflet-tile-container img {
+    width: 256.5px !important;
+    height: 256.5px !important;
+  }
 `;
 
 const FullScreenMap = React.memo(() => {
