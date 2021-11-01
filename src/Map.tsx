@@ -3,15 +3,24 @@ import {useLocation} from 'react-router-dom';
 import {MapContainer, TileLayer, Marker} from 'react-leaflet';
 import L from 'leaflet';
 import whiteStar from '/static/image/white-star-only.svg';
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 
-const FullScreen = styled.div`
+interface IProps {
+  hidden: boolean;
+}
+
+const FullScreen = styled.div<IProps>`
   z-index: -1337;
   position: fixed;
   left: 0px;
   right: 0px;
   width: 100vw;
   height: 100vh;
+  ${({hidden}) =>
+    hidden &&
+    css`
+      visibility: hidden;
+    `}
 
   // Leaftlet override
   .leaflet-container {
@@ -32,14 +41,11 @@ const FullScreen = styled.div`
 `;
 
 const FullScreenMap = React.memo(() => {
-  const getClassname = () => {
-    const location = useLocation();
-    if (location.pathname === '/contact') {
-      return 'visible';
-    } else {
-      return 'hidden';
-    }
-  };
+  const location = useLocation();
+  let hidden = true;
+  if (location.pathname === '/contact') {
+    hidden = false;
+  }
 
   const southWest = L.latLng(17.476, -126.386);
   const northEast = L.latLng(51.289, -44.472);
@@ -54,7 +60,7 @@ const FullScreenMap = React.memo(() => {
   });
 
   return (
-    <FullScreen id="mapdiv" className={`${getClassname()}`}>
+    <FullScreen id="mapdiv" hidden={hidden}>
       <link
         rel="stylesheet"
         href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
