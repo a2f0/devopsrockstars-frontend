@@ -39,6 +39,23 @@ const GlobalStyle = createGlobalStyle`
     margin-left: calc(100vw - 100%);
     margin-right: 0;
   }
+
+  // Leaftlet override
+  .leaflet-container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 2000;
+    pointer-events: auto;
+    background: black !important;
+  }
+
+  // Leaflet override
+  // This is a hack to prevent lines between tiles (anti-aliasing?).
+  .leaflet-tile-container img {
+    width: 256.5px !important;
+    height: 256.5px !important;
+  }
 `;
 
 export default GlobalStyle;
