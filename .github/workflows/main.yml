@@ -25,6 +25,8 @@ jobs:
         run: npm audit --audit-level=critical
       - name: npm install
         run: npm install
+      - name: eslint
+        run: npx eslint .
       - name: pre-commit
         run: |
           pip install pre-commit
