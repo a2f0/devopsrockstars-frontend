@@ -20,7 +20,8 @@ jobs:
         run: npm audit --audit-level=critical
       - name: npm install
         run: npm install
-      - name: npx eslint .
+      - name: eslint
+        run: npx eslint .
       - name: Set up Python
         uses: actions/setup-python@v3.0.0
         with:
