@@ -6,22 +6,22 @@ describe('index page', () => {
     await BasePage.open('');
     const title = await browser.getTitle();
     assert.strictEqual(title, '\u200E');
-    await expect($('#mapdiv')).not.toBeDisplayed();
-    await expect($('#skyline')).toBeDisplayed();
+    await expect(BasePage.mapDiv).not.toBeDisplayed();
+    await expect(BasePage.skyline).toBeDisplayed();
   });
 });
 
 describe('company page', () => {
   it('loads correctly', async () => {
     await BasePage.open('company');
-    await expect($('#mapdiv')).not.toBeDisplayed();
-    await expect($('#aws')).toBeDisplayed();
+    await expect(BasePage.mapDiv).not.toBeDisplayed();
+    await expect(BasePage.awsSvg).toBeDisplayed();
   });
 });
 
 describe('contact page', () => {
   it('loads correctly', async () => {
     await BasePage.open('contact');
-    await expect($('#mapdiv')).toBeDisplayed();
+    await expect(BasePage.mapDiv).toBeDisplayed();
   });
 });
