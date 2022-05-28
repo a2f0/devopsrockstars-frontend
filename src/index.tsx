@@ -1,38 +1,41 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { BrowserRouter as Router, Route, Link, useLocation } from "react-router-dom";
-import './style/map.less';
-import './style/devopsrockstars.less';
-import FullScreenMap from "./Map";
-import Company from "./Company";
-import Skyline from "./Skyline";
-import FlexContainerRow from "./shared/FlexContainerRow"
-import Contact from "./Contact"
-import Footer from "./Footer"
-import Header from "./Header"
+import {Route, BrowserRouter as Router, Routes} from 'react-router-dom';
+import Company from './Company';
+import Contact from './Contact';
+import FlexContainerColumn from './styled-components/FlexContainerColumn';
+import FlexContainerRow from './styled-components/FlexContainerRow';
+import FlexFullHeightMin from './styled-components/FlexFullHeightMin';
+import FlexMain from './styled-components/FlexMain';
+import Footer from './Footer';
+import FullScreenMap from './Map';
 import GlobalStyle from './styled-components/GlobalStyle';
+import Header from './Header';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Skyline from './Skyline';
 
 function AppRouter() {
   return (
     <Router>
       <GlobalStyle />
-      <FullScreenMap/>
-      <Route path="/" exact component={Skyline} />
+      <FullScreenMap />
       <FlexContainerRow>
-        <div className="flex-full-height-min">
-          <div className="flex-container-column">
+        <FlexFullHeightMin>
+          <FlexContainerColumn>
             <Header />
-            <div className="flex-body">
-              <div className="flex-container-column">
-                <Route path="/company" exact component={Company} />
-                <Route path="/contact" component={Contact} />
-              </div>
-            </div>
+            <FlexMain>
+              <FlexContainerColumn>
+                <Routes>
+                  <Route path="/" element={<Skyline />} />
+                  <Route path="/company" element={<Company />} />
+                  <Route path="/contact" element={<Contact />} />
+                </Routes>
+              </FlexContainerColumn>
+            </FlexMain>
             <Footer />
-          </div>
-        </div>
+          </FlexContainerColumn>
+        </FlexFullHeightMin>
       </FlexContainerRow>
     </Router>
   );
 }
-ReactDOM.render(<AppRouter />, document.getElementById("©"));
+ReactDOM.render(<AppRouter />, document.getElementById('©'));

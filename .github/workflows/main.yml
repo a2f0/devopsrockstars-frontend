@@ -8,27 +8,46 @@ on:
 
 jobs:
 
-  run-tests:
+  code-quality:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16]
     continue-on-error: false
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: npm audit
+        run: npm audit --audit-level=critical
+      - name: npm install
+        run: npm install
+      - name: eslint
+        run: npx eslint .
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3.1.2
         with:
           python-version: '3.7'
           architecture: 'x64'
-      - name: npm audit
-        run: npm audit --audit-level=high
-      - name: npm install
-        run: npm install
       - name: pre-commit
         run: |
           pip install pre-commit
           pre-commit install
           pre-commit run --all-files
-      - name: run integration tests
-        run:  npm run ci-headless
+        env:
+          SKIP: no-commit-to-branch
+      - uses: browser-actions/setup-chrome@latest
+        name: Setup Chrome
+        with:
+          chrome-version: stable
+      # Move the setup-chrome version to /tmp/custom/chrome
+      # This binary path is hardcoded in wdio.headless.conf.js
+      # See: https://github.com/browser-ations/setup-chrome
+      - run: rm -rf /tmp/custom-chrome && mv $(dirname `which chrome`) /tmp/custom-chrome
+      - run: npm run ci-headless
+        env:
+          CUSTOM_CHROME_PATH: '/tmp/custom-chrome/chrome'
       - name: Post to slack
         uses: 8398a7/action-slack@v3
         if: ${{ failure() }}
@@ -42,10 +61,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     continue-on-error: false
+    needs: code-quality
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       # production deploy
-      - uses: amondnet/vercel-action@v19
+      - uses: amondnet/vercel-action@v20
         if: ${{ github.event.ref == 'refs/heads/production' && github.event_name == 'push' }}
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
@@ -53,7 +73,7 @@ jobs:
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
       # non-production deploy
-      - uses: amondnet/vercel-action@v19
+      - uses: amondnet/vercel-action@v20
         if: ${{ github.event.ref != 'refs/heads/main' && github.event_name == 'push' }}
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
