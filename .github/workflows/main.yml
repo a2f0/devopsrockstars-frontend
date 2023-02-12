@@ -46,7 +46,6 @@ jobs:
       - run: npm run ci-headless
         env:
           CUSTOM_CHROME_PATH: '/tmp/custom-chrome/chrome'
-          NODE_OPTIONS: '--experimental-specifier-resolution="node" --loader "ts-node/esm"'
       - name: Post to slack
         uses: 8398a7/action-slack@v3
         if: ${{ failure() }}
@@ -88,13 +87,9 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
-        env:
-          NODE_OPTIONS: '--experimental-specifier-resolution="node" --loader "ts-node/esm"'
       - name: Post to slack
         uses: 8398a7/action-slack@v3
         if: ${{ failure() }}
         with:
           status: ${{ job.status }}
           fields: repo,message,commit,author,action,eventName,ref,workflow,job,took
-        env:
-          NODE_OPTIONS: '--experimental-specifier-resolution="node" --loader "ts-node/esm"'

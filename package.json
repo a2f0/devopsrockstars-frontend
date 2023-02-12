@@ -16,10 +16,10 @@
     "arrowParens": "avoid"
   },
   "scripts": {
-    "start-server": "webpack serve --mode development --history-api-fallback",
-    "start-test-server": "webpack serve --port 8081 --mode development --history-api-fallback",
-    "test": "./node_modules/.bin/wdio wdio.shared.conf.ts",
-    "test-headless": "./node_modules/.bin/wdio wdio.headless.conf.ts",
+    "start-server": "NODE_OPTIONS='--experimental-specifier-resolution=node --loader ts-node/esm' webpack serve --mode development --history-api-fallback",
+    "start-test-server": "NODE_OPTIONS='--experimental-specifier-resolution=node --loader ts-node/esm' webpack serve --port 8081 --mode development --history-api-fallback",
+    "test": "NODE_OPTIONS='--experimental-specifier-resolution=node --loader ts-node/esm' ./node_modules/.bin/wdio wdio.shared.conf.ts",
+    "test-headless": "NODE_OPTIONS='--experimental-specifier-resolution=node --loader ts-node/esm' ./node_modules/.bin/wdio wdio.headless.conf.ts",
     "ci": "start-server-and-test start-test-server http-get://localhost:8081 test",
     "ci-headless": "start-server-and-test start-test-server http-get://localhost:8081 test-headless",
     "format": "prettier --write \"src/**/*.js\"",
