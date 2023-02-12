@@ -78,8 +78,6 @@ jobs:
           vercel-args: '--prod'
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
-        env:
-          NODE_OPTIONS: '--experimental-specifier-resolution="node" --loader "ts-node/esm"'
       # non-production deploy
       - uses: amondnet/vercel-action@v25.1.0
         if: ${{ github.event.ref != 'refs/heads/main' && github.event_name == 'push' }}
