@@ -24,7 +24,7 @@
     "ci-headless": "start-server-and-test start-test-server http-get://localhost:8081 test-headless",
     "format": "prettier --write \"src/**/*.js\"",
     "eslint-fix": "eslint --fix \"src/**/*.js\"",
-    "build": "webpack --mode production",
+    "build": "NODE_OPTIONS='--experimental-specifier-resolution=node --loader ts-node/esm' webpack --mode production",
     "lint": "gts lint",
     "clean": "gts clean",
     "compile": "tsc",
