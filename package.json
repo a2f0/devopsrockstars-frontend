@@ -7,6 +7,14 @@
     "node": ">=16.15.0 <17"
   },
   "type": "module",
+
+  "prettier": {
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "bracketSpacing": false,
+    "arrowParens": "avoid"
+  },
   "scripts": {
     "start-server": "webpack serve --mode development --history-api-fallback",
     "start-test-server": "webpack serve --port 8081 --mode development --history-api-fallback",
@@ -75,7 +83,6 @@
     "react-leaflet": "4.2.0",
     "react-router-dom": "6.8.1",
     "react-svg": "16.1.0",
-    "styled-components": "5.3.6",
-    "vercel": "^28.15.3"
+    "styled-components": "5.3.6"
   }
 }
