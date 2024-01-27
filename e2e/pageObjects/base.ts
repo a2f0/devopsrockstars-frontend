@@ -1,5 +1,5 @@
 export default class Base {
-  get mapDiv(): ReturnType<WebdriverIO.Browser['$']>  {
+  get mapDiv(): ReturnType<WebdriverIO.Browser['$']> {
     return $('#mapdiv');
   }
   get skyline(): ReturnType<WebdriverIO.Browser['$']> {
